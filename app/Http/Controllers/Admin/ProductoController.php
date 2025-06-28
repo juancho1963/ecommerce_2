@@ -110,21 +110,28 @@ class ProductoController extends Controller
             if ($request->has('thumbnail')){
                 $old_image = $producto::where('name', $data['name'])->first()->thumbnail;
                 $this->removeProductoImageFromStorage($old_image);
+    /*             $this->removeProductoImageFromStorage($request->file('thumbnail')); */
                 $data['thumbnail'] = $this->saveImage($request->file('thumbnail'));
             }
 
             if($request->has('first_image')){
-                $this->removeProductoImageFromStorage($request->file('first_image'));
+                $old_image = $producto::where('name', $data['name'])->first()->first_image;
+                $this->removeProductoImageFromStorage($old_image);
+               /*  $this->removeProductoImageFromStorage($request->file('first_image')); */
                 $data['first_image'] = $this->saveImage($request->file('first_image'));
             }
 
             if($request->has('second_image')){
-                $this->removeProductoImageFromStorage($request->file('second_image'));
+                $old_image = $producto::where('name', $data['name'])->first()->second_image;
+                $this->removeProductoImageFromStorage($old_image);
+               /*  $this->removeProductoImageFromStorage($request->file('second_image')); */
                 $data['second_image'] = $this->saveImage($request->file('second_image'));
             }
 
             if($request->has('third_image')){
-                $this->removeProductoImageFromStorage($request->file('third_image'));
+                $old_image = $producto::where('name', $data['name'])->first()->second_image;
+                $this->removeProductoImageFromStorage($old_image);
+              /*   $this->removeProductoImageFromStorage($request->file('third_image')); */
                 $data['third_image'] = $this->saveImage($request->file('third_image'));
             }
 
