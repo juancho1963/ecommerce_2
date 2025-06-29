@@ -107,7 +107,7 @@
                                 <label for="thumbnail" class="my-2">Imagen para miniatura</label>
                                 <input type="file" class="form-control
                                 @error('thumbnail') is-invalid @enderror" name="thumbnail"
-                                id="thumbnail">
+                                id="thumbnail" value="{{$producto->thumbnail, old('thumbnail')}}>
                                 @error('thumbnail')
                                     <span class="invalid-feedback">
                                         <strong>{{$message}}</strong>
