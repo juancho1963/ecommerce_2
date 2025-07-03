@@ -107,7 +107,7 @@
                                 <label for="thumbnail" class="my-2">Imagen para miniatura</label>
                                 <input type="file" class="form-control
                                 @error('thumbnail') is-invalid @enderror" name="thumbnail"
-                                id="thumbnail" value="{{$producto->thumbnail, old('thumbnail')}}>
+                                id="thumbnail">
                                 @error('thumbnail')
                                     <span class="invalid-feedback">
                                         <strong>{{$message}}</strong>
@@ -178,9 +178,23 @@
                                 heigh="100">
                             </div>
 
- <!--                            @foreach ($errors->all() as $error)
-                                <div>{{ $error }}</div>
-                            @endforeach -->
+                            <div class="mb-2">
+                                <label for="status" class="my-2">Estado del producto</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="status" id="status" value="1"
+                                        @checked($producto->status)>
+                                    <label class="form-check-label" for="status">
+                                        Con stock
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="status" id="status" value="0"
+                                        @checked(!$producto->status)>
+                                    <label class="form-check-label" for="status">
+                                      Sin stock
+                                    </labelstatus
+                                </div>
+                            </div>
 
                             <div class="mb-2">
                                 <button type="submit" class="btn btn-sm btn-primary">

@@ -16,29 +16,33 @@ class ProductoController extends Controller
             ->additional([
                 'colors' => Color::has('productos')->get(),
                 'sizes' => Size::has('productos')->get(),
-            ])
+            ]);
     }
+
     public function show(Producto $producto) {
         return ProductoResource::make(
             $producto->load(['colors','sizes','reviews'])
         );
     }
+
     public function filterProductosByColor(Color $color) {
         return ProductoResource::collection(
             $color->productos()->with(['colors','sizes','reviews'])->latest()->get())
             ->additional([
                 'colors' => Color::has('productos')->get(),
                 'sizes' => Size::has('productos')->get(),
-            ])
+            ]);
     }
+
     public function filterProductosBySize(Size $size) {
         return ProductoResource::collection(
             $size->productos()->with(['colors','sizes','reviews'])->latest()->get())
             ->additional([
                 'colors' => Color::has('productos')->get(),
                 'sizes' => Size::has('productos')->get(),
-            ])
+            ]);
     }
+
     public function filterProductosByTerm($searchTerm) {
         return ProductoResource::collection(
             Producto::where('name','LIKE','%',$searchTerm.'%')
@@ -46,6 +50,6 @@ class ProductoController extends Controller
             ->additional([
                 'colors' => Color::has('productos')->get(),
                 'sizes' => Size::has('productos')->get(),
-            ])
+            ]);
     }
-)
+}

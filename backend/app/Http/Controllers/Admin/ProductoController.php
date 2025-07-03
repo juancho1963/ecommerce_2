@@ -108,9 +108,9 @@ class ProductoController extends Controller
             $data = $request->all();
 
             if ($request->has('thumbnail')){
-                $old_image = $producto::where('name', $data['name'])->first()->thumbnail;
-                $this->removeProductoImageFromStorage($old_image);
-    /*             $this->removeProductoImageFromStorage($request->file('thumbnail')); */
+                   $old_image = $producto::where('name', $data['name'])->first()->thumbnail;
+                   $this->removeProductoImageFromStorage($old_image);
+   /*              $this->removeProductoImageFromStorage($request->file('thumbnail')); // original */
                 $data['thumbnail'] = $this->saveImage($request->file('thumbnail'));
             }
 
@@ -124,18 +124,19 @@ class ProductoController extends Controller
             if($request->has('second_image')){
                 $old_image = $producto::where('name', $data['name'])->first()->second_image;
                 $this->removeProductoImageFromStorage($old_image);
-               /*  $this->removeProductoImageFromStorage($request->file('second_image')); */
+           /*      $this->removeProductoImageFromStorage($request->file('second_image')); */
                 $data['second_image'] = $this->saveImage($request->file('second_image'));
             }
 
             if($request->has('third_image')){
                 $old_image = $producto::where('name', $data['name'])->first()->second_image;
                 $this->removeProductoImageFromStorage($old_image);
-              /*   $this->removeProductoImageFromStorage($request->file('third_image')); */
+            /*     $this->removeProductoImageFromStorage($request->file('third_image')); */
                 $data['third_image'] = $this->saveImage($request->file('third_image'));
             }
 
             $data['slug'] = Str::slug($request->name);
+            $data['status'] = $request->status;
 
             $producto->update($data);
             $producto->colors()->sync($request->color_id);
