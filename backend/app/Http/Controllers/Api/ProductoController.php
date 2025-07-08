@@ -45,7 +45,7 @@ class ProductoController extends Controller
 
     public function filterProductosByTerm($searchTerm) {
         return ProductoResource::collection(
-            Producto::where('name','LIKE','%',$searchTerm.'%')
+            Producto::where('name','LIKE','%'.$searchTerm.'%')
             ->with(['colors','sizes','reviews'])->latest()->get())
             ->additional([
                 'colors' => Color::has('productos')->get(),
