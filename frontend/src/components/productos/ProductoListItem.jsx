@@ -4,12 +4,12 @@ import { colorTranslations } from '../helpers/colorTranslation'
 
 export default function ProductoListItem({ producto}) {
     return (
-        <div className='col-mb-4 mb-3'>
+        <div className='col-md-4 mb-3'>
             <Link className='text-decoration-none text-dark'>
                 <div className='card shadow-sm h-100'>
-                    <img src={producto.thumbnail} alt={producto.name}
+                    <img src={producto.thumbnail} alt={ producto.name } 
                         className='card-img-top'/>
-                        <div className='card-body'>
+                       <div className='card-body'>
                             <div className='d-flex justify-content-between'>
                                 <h5 className='text-dark'>{producto.name}</h5>
                                 <h6 className='badge bg-success p-2'>Bs{producto.price}</h6>
@@ -33,7 +33,7 @@ export default function ProductoListItem({ producto}) {
                                         </span>
                                         :
                                         <span className='badge bg-danger p-2'>
-                                            En stock
+                                            Sin stock
                                         </span>
                                     }
                                 </div>

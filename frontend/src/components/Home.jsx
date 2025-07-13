@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import ProductosList from './productos/ProductosList'
 import { axiosRequest } from './helpers/config'
 import { useDebounce } from 'use-debounce'
+import Alert from './layouts/Alert'
+import Spinner from './layouts/Spinner'
 
 export default function Home() {
         const [productos, setProductos] = useState([])
@@ -35,25 +37,30 @@ export default function Home() {
         useEffect(() => {
             const fetchAllProductos = async () => {
                 setMessage('')
+                setLoading(true)
                 try {
                     if(selectColor) {
                         const response = await axiosRequest.get(`productos/${selectColor}/color`)
                         setProductos(response.data.data)
                         setColors(response.data.colors)
-                        setSizes(response.data.sizes) 
+                        setSizes(response.data.sizes)
+                        setLoading(false)
                     }else  if(selectSize) {
                         const response = await axiosRequest.get(`productos/${selectSize}/size`)
                         setProductos(response.data.data)
                         setColors(response.data.colors)
-                        setSizes(response.data.sizes) 
+                        setSizes(response.data.sizes)
+                        setLoading(false)
                     }else  if(debouncedSearchTerm[0]) {
                         const response = await axiosRequest.get(`productos/${searchTerm}/find`)
                         if(response.data.data.length > 0){
                             setProductos(response.data.data)
                             setColors(response.data.colors)
-                            setSizes(response.data.sizes)   
+                            setSizes(response.data.sizes)
+                            setLoading(false)
                         }else{
                             setMessage('Lo sentimos, no hemos encontrado productos que coincidan con tu busqueda.')
+                            setLoading(false)
                         }
                                      
                     }
@@ -61,7 +68,8 @@ export default function Home() {
                         const response = await axiosRequest.get('productos')
                         setProductos(response.data.data)
                         setColors(response.data.colors)
-                        setSizes(response.data.sizes) 
+                        setSizes(response.data.sizes)
+                        setLoading(false)
                     }
 
                 } catch (error) {
@@ -153,11 +161,10 @@ export default function Home() {
                 </div>
                 {
                     message ?
-                    <div className='alert alert-info'>
-                        {
-                            message
-                        }
-                    </div>
+                    <Alert type="primary" content={message}/>
+                    :
+                    loading ?
+                    <Spinner/>
                     :
                     <ProductosList productos={productos}/>
                 }                                    
