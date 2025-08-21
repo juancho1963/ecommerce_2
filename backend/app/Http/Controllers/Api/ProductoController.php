@@ -20,6 +20,9 @@ class ProductoController extends Controller
     }
 
     public function show(Producto $producto) {
+        if(!$producto) {
+            abort(404);
+        }
         return ProductoResource::make(
             $producto->load(['colors','sizes','reviews'])
         );

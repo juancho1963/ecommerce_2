@@ -5,7 +5,7 @@ import { colorTranslations } from '../helpers/colorTranslation'
 export default function ProductoListItem({ producto}) {
     return (
         <div className='col-md-4 mb-3'>
-            <Link className='text-decoration-none text-dark'>
+            <Link to={`/producto/${producto.slug}`} className='text-decoration-none text-dark'>
                 <div className='card shadow-sm h-100'>
                     <img src={producto.thumbnail} alt={ producto.name } 
                         className='card-img-top'/>

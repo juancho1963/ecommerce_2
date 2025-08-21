@@ -129,7 +129,7 @@ class ProductoController extends Controller
             }
 
             if($request->has('third_image')){
-                $old_image = $producto::where('name', $data['name'])->first()->second_image;
+                $old_image = $producto::where('name', $data['name'])->first()->third_image;
                 $this->removeProductoImageFromStorage($old_image);
             /*     $this->removeProductoImageFromStorage($request->file('third_image')); */
                 $data['third_image'] = $this->saveImage($request->file('third_image'));
